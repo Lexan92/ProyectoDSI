@@ -2,7 +2,7 @@
 SE USA LARAVEL version 5.2.3
 
 ## BASE DE DATOS
-Configure su base de datos con el nombre de: BDDDSI
+Configure su base de datos con el nombre de: BDDSI
 
 ## CONFIGURACIONES INICIALES
 
@@ -26,3 +26,6 @@ debera generar una llave para el proyecto use el siguiente comando: php artisan 
 ### Paso 4
 
 si todo se  hizo correctamente debera correr el proyecto en el servidor, use el comando: php artisan serve
+
+## RAMAS
+ La rama por defecto a utilizar es la llamada "Sprint1" aqui debera hacer sus commits y push
