@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('datos/tipoResponsable','TipoResponsableController');
+Route::resource('detalle/grado','GradoController');
