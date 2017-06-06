@@ -18,3 +18,4 @@ Route::get('/', function () {
 Route::resource('datos/tipoResponsable','TipoResponsableController');
 Route::resource('detalle/grado','GradoController');
 Route::resource('detalle/seccion','SeccionController');
+Route::resource('detalle/turno','TurnoController');

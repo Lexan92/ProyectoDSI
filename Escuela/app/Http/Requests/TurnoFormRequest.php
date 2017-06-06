@@ -4,7 +4,7 @@ namespace Escuela\Http\Requests;
 
 use Escuela\Http\Requests\Request;
 
-class SeccionFormRequest extends Request
+class TurnoFormRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
