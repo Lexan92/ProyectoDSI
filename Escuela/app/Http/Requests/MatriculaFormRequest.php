@@ -34,6 +34,7 @@ class MatriculaFormRequest extends Request
             'fechamatricula'=>'required',
             'repitegrado'=>'required',
             'fotografia'=>'required',
+            'cePrevio'=>'required',
             #'estado'=>'required',
         ];
     }
