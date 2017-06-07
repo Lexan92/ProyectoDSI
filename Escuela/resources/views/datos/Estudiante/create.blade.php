@@ -4,7 +4,15 @@
 <div class="row">
 	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 		<h2>Formulario de Matricula</a></h2>
-		
+		@if (count($errors)>0)
+			<div class="alert alert-danger">
+				<ul>
+				@foreach ($errors->all() as $error)
+					<li>{{$error}}</li>
+				@endforeach
+				</ul>
+			</div>
+			@endif
 	</div>
 </div>
 <div class="row">
@@ -16,7 +24,8 @@
 
 <div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		<form role="form">
+		{!!Form::open(array('url'=>'datos/Estudiante','method'=>'POST','autocomplete'=>'off'))!!}
+            {{Form::token()}}
 
 		<div class="form-group">
 			<label>Nombres</label>
@@ -40,22 +49,22 @@
 
 		<div class="form-group">
 			<label>Sexo</label></br>
-			<label><input type="radio"  name="opciones" id="opc1" value="opcion1" checked> Femenino</label>
+			<label><input type="radio"  name="opciones" id="opc1" value="F" checked> Femenino</label>
 		</div>
 
 		<div class="form-group">
 			
-			<label><input type="radio"  name="opciones" id="opc1" value="opcion1"> Masculino</label>
+			<label><input type="radio"  name="opciones" id="opc1" value="M"> Masculino</label>
 		</div>
 
 		<div class="form-group">
 			<label>¿Tiene discapacidad?</label></br>
-			<label><input type="radio"  name="opciones1" id="opc2" value="opcion2" checked> NO</label>
+			<label><input type="radio"  name="opciones1" id="opc2" value="0" checked> NO</label>
 		</div>
 
 		<div class="form-group">
 			
-			<label><input type="radio"  name="opciones1" id="opc2" value="opcion2"> SI</label>
+			<label><input type="radio"  name="opciones1" id="opc2" value="1"> SI</label>
 		</div>
 
 			<div class="form-group">
@@ -74,21 +83,21 @@
 
 		<div class="form-group">
 			<label>Autorizacion de Vacunacion</label></br>
-			<label><input type="radio"  name="opciones3" id="opc3" value="opcion3" checked> SI</label>
+			<label><input type="radio"  name="opciones3" id="opc3" value="1" checked> SI</label>
 		</div>
 
 		<div class="form-group">
 			
-			<label><input type="radio"  name="opciones3" id="opc3" value="opcion3"> NO</label>
+			<label><input type="radio"  name="opciones3" id="opc3" value="0"> NO</label>
 		</div>
 
 		<div class="form-group">
 		<label>Reside en Area Urbana</label></br>
-			<label><input type="radio"  name="opciones4" id="opc4" value="opcion4" checked> SI</label>
+			<label><input type="radio"  name="opciones4" id="opc4" value="1" checked> SI</label>
 		</div>
 
 		<div class="form-group">
-			<label><input type="radio"  name="opciones4" id="opc4" value="opcion4"> NO</label>
+			<label><input type="radio"  name="opciones4" id="opc4" value="0"> NO</label>
 		</div>
 
 		<div class="row">
@@ -161,7 +170,12 @@
 			<label>Telefono de contacto del Padre</label>
 			<input type="text" class="form-control" name="telefonoPadre" placeholder="Telefono principal de contacto">
 		</div>
-		</form>
+
+		<div class="form-group">
+            	<button class="btn btn-primary" type="submit">Guardar</button>
+            	<button class="btn btn-danger" type="reset">Cancelar</button>
+            </div>
+		{!!Form::close()!!}
 	</div>
 </div>
 

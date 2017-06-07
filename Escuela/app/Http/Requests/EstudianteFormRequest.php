@@ -24,7 +24,7 @@ class EstudianteFormRequest extends Request
     public function rules()
     {
         return [
-        'id_partida'=>'required',
+        
         'nombre'=>'required|alpha_dash|max:50',
         'apellido'=>'required|alpha_dash|max:50',
         'fechadenacimiento'=>'required',
