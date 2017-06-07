@@ -23,6 +23,7 @@ class Matricula extends Model
     	'fechamatricula',
     	'repitegrado',
     	'fotografia',
+        'cePrevio',
     	'estado'
     ];
 
