@@ -28,4 +28,4 @@ debera generar una llave para el proyecto use el siguiente comando: php artisan 
 si todo se  hizo correctamente debera correr el proyecto en el servidor, use el comando: php artisan serve
 
 ## RAMAS
- La rama por defecto a utilizar es la llamada "Sprint1" aqui debera hacer sus commits y push
+ La rama por defecto a utilizar es la llamada "Sprint2" aqui debera hacer sus commits y push
