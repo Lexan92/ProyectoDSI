@@ -14,7 +14,7 @@ class Matricula extends Model
 
     protected $fillable = [
     	'nie',
-    	'iddetallegrado'
+    	'iddetallegrado',
     	'presentapartida',
     	'certificadoprom',
     	'presentafotos',
