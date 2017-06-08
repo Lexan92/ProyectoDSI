@@ -21,8 +21,12 @@ class Estudiante extends Model
     	'enfermedad',
     	'zonaurbana',
     	'autorizavacuna',
+<<<<<<< HEAD
     	'estado',
         'id'
+=======
+    	'estado'
+>>>>>>> 73a6ca3361cbf693de0803b508336068cd8c88da
     ];
 
     protected $guarded = [
