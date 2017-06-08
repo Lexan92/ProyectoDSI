@@ -25,15 +25,15 @@ class MatriculaFormRequest extends Request
     {
         return [
             'nie'=>'required',
-            'iddetallegrado'=>'required',
+            #'iddetallegrado'=>'required',
             'presentapartida'=>'required|max:50',
             'certificadoprom'=>'required|max:50',
             'presentafotos'=>'required|max:200',
             'constanciaconducta'=>'required',
-            'educacioninicial'=>'required'
+            'educacioninicial'=>'required',
             'fechamatricula'=>'required',
             'repitegrado'=>'required',
-            'fotografia'=>'required',
+            'fotografia'=>'mimes:jpeg,bmp,png,jpg',
             'cePrevio'=>'required',
             #'estado'=>'required',
         ];

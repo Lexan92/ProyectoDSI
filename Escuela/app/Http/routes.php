@@ -20,3 +20,4 @@ Route::resource('datos/Estudiante','EstudianteController');
 Route::resource('detalle/grado','GradoController');
 Route::resource('detalle/seccion','SeccionController');
 Route::resource('detalle/turno','TurnoController');
+Route::resource('expediente/matricula','MatriculaController');
