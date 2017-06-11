@@ -59,6 +59,14 @@ class MatriculaController extends Controller
     		->paginate(7);
     		return view('expediente.matricula.index',["matriculas"=>$matriculas,"searchText"=>$query]);
     	}
+        else
+        {
+            $query = trim($request->get('searchText'));
+            $tipos = DB::table('estudiante')->where('nombre','LIKE','%'.$query.'%')
+            ->orderBy('apellido','asc')
+            ->paginate(20);
+            return view('datos.Estudiante.index',["estudiantes"=>$tipos,"searchText"=>$query]);
+        }
 
     }
 
