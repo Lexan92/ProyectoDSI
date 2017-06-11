@@ -23,7 +23,8 @@
 					<td>{{ $est->nie}}</td>
 					<td>{{ $est->apellido}}</td>
 					<td>{{$est->nombre}}</td>
-					<td></td>
+					<td>{{$est->nombreGrado}}</td>
+					<td>{{$est->nombreSeccion}}</td>
 					<td></td>
 
 					

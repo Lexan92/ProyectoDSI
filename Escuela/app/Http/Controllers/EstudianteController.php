@@ -24,9 +24,15 @@ class EstudianteController extends Controller
     	{
     	    $query = trim($request->get('searchText'));
     		$est = DB::table('estudiante')
-            ->join('matricula','estudiante.nie','=','matricula.nie','full outer')
+            ->select('estudiante.nombre','estudiante.apellido','estudiante.nie','matricula.nie','grado.nombreGrado','seccion.nombreSeccion')
+            ->join('matricula as matricula','estudiante.nie','=','matricula.nie','full outer')
+            ->join('detalle_grado as detalle_grado','matricula.iddetallegrado','=','detalle_grado.iddetallegrado','full outer')
+            ->join('grado as grado','detalle_grado.idgrado','=','grado.idgrado','full outer')
+            ->join('seccion as seccion','detalle_grado.idseccion','=','seccion.idseccion','full outer')
             ->where('estudiante.nombre',$query)
             ->get();
+
+
             return view('datos.Estudiante.index',["estudiantes"=>$est,"searchText"=>$query]);
 
     	}
