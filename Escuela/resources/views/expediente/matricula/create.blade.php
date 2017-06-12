@@ -28,7 +28,7 @@
 		<div class="col-md-12">
 			<div class="form-group col-md-3">
 				<label for="">Fecha de Matricula</label>
-				<input type="date" class="form-control" name="fechamatricula" autofocus placeholder="AAAA-MM-DD" required="">
+				<input type="date" class="form-control" name="fechamatricula" autofocus placeholder="AAAA-MM-DD" >
 			</div>
 			<div class="form-group col-md-3">
 				<div class="form-group">
@@ -101,7 +101,7 @@
 			</div>
 			<div class="form-group col-md-3">
 				<label>N°. Folio partida de nacimiento</label>
-				<input type="number" value="111" class="form-control" name="folio" autofocus placeholder="Folio..." required="">
+				<input type="number" value="111" class="form-control" name="folio" autofocus placeholder="Folio..." >
 			</div>
 			<div class="form-group col-md-3">
 				<label>N°. Libro partida de nacimiento</label>
@@ -112,7 +112,7 @@
 		<div class="col-md-12 col-md-offset-0">
 			<div class="form-group col-md-3">
 				<label for="">Nombres</label>
-				<input type="text" value="111" class="form-control" name="nombre" autofocus placeholder="Nombres Completos"required>
+				<input type="text" value="111" class="form-control" name="nombre" autofocus placeholder="Nombres Completos">
 			</div>
 			<div class="form-group col-md-3">
 				<label for="">Apellidos</label>
