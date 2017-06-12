@@ -22,18 +22,33 @@ class EstudianteController extends Controller
     {
     	if($request)
     	{
-    	    $query = trim($request->get('searchText'));
+    	    $query1 = trim($request->get('searchNombre'));
+            $query2 = trim($request->get('searchApellido'));
+            $query3 = trim($request->get('searchNie'));
+            #$query4 = $request->get('fechamatricula');
+            $query5 = $request->get('idgrado');
+            $query6 = $request->get('idseccion');
+            $query7 = $request->get('idturno');
+          
     		$est = DB::table('estudiante')
             ->select('estudiante.nombre','estudiante.apellido','estudiante.nie','matricula.nie','grado.nombreGrado','seccion.nombreSeccion')
             ->join('matricula as matricula','estudiante.nie','=','matricula.nie','full outer')
             ->join('detalle_grado as detalle_grado','matricula.iddetallegrado','=','detalle_grado.iddetallegrado','full outer')
             ->join('grado as grado','detalle_grado.idgrado','=','grado.idgrado','full outer')
             ->join('seccion as seccion','detalle_grado.idseccion','=','seccion.idseccion','full outer')
-            ->where('estudiante.nombre',$query)
+            ->where('estudiante.nombre',$query1)
+            ->orWhere('estudiante.apellido',$query2)
+            #->orWhere('matricula.fechamatricula',$query4)
+            ->orWhere('grado.idgrado',$query5)
+            #->orWhere('estudiante.nie',$query3)
             ->get();
+        //catalogos de grados,secciones y turnos
+        $grados = DB::table('grado')->get();
+    	$secciones = DB::table('seccion')->get();
+    	$turnos = DB::table('turno')->get();
 
 
-            return view('datos.Estudiante.index',["estudiantes"=>$est,"searchText"=>$query]);
+            return view('datos.Estudiante.index',["estudiantes"=>$est,"searchNombre"=>$query1,"searchApellido"=>$query2,"searchNie"=>$query3, "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos]);
 
     	}
     	
@@ -82,12 +97,17 @@ class EstudianteController extends Controller
 
     public function show($id)		//Para mostrar
     {
-    	#return view("datos.Estudiante.show",["nie"=>Estudiante::findOrFail($id)]);
+    	return view("datos.Estudiante.show",["estudiante"=>Estudiante::findOrFail($id)]);
     }
 
     public function edit($id)
     {
-        return view("datos.Estudiante.edit",["estudiante"=>Estudiante::findOrFail($id)]);
+        //catalogos de grados,secciones y turnos
+        $grados = DB::table('grado')->get();
+    	$secciones = DB::table('seccion')->get();
+    	$turnos = DB::table('turno')->get();
+
+        return view("datos.Estudiante.edit",["estudiante"=>Estudiante::findOrFail($id), "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos]);
     }
     
     

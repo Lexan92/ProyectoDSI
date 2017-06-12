@@ -23,7 +23,7 @@ class GradoController extends Controller
     	if($request)
     	{
     		$query = trim($request->get('searchText'));
-    		$grados = DB::table('grado')->where('nombre','LIKE','%'.$query.'%')
+    		$grados = DB::table('grado')->where('nombreGrado','LIKE','%'.$query.'%')
     		->orderBy('idgrado','desc')
     		->paginate(7);
     		return view('detalle.grado.index',["grados"=>$grados,"searchText"=>$query]);
@@ -39,7 +39,7 @@ class GradoController extends Controller
     public function store( GradoFormRequest $request)		//Para almacenar
     {
     	$grado = new Grado;
-    	$grado -> nombre = $request -> get('nombre');
+    	$grado -> nombreGrado = $request -> get('nombre');
     	$grado -> estado = 'Activo';
     	$grado -> save();
 
@@ -59,7 +59,7 @@ class GradoController extends Controller
     public function update(GradoFormRequest $request, $id)
     {	
     	$grado = Grado::findOrFail($id);
-    	$grado -> nombre = $request -> get('nombre');
+    	$grado -> nombreGrado = $request -> get('nombre');
     	$grado -> estado = 'Activo';
     	$grado -> update();
 
