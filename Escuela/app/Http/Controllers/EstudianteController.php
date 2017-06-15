@@ -63,37 +63,7 @@ class EstudianteController extends Controller
 
     public function store( EstudianteFormRequest $request)		//Para almacenar
     {
-    	$alumno = new Estudiante;
-    	$alumno -> nombre = $request -> get('nombreAlumno');
-    	$alumno -> apellido = $request -> get('apellidoAlumno');
-    	$alumno -> fechadenacimiento = $request -> get('fecha');
-    	$alumno -> sexo = $request -> get('opciones');
-    	$alumno -> discapacidad = $request -> get('opciones1');
-    	$alumno -> domicilio = $request -> get('domicilio');
-    	$alumno -> enfermedad = $request -> get('enfermedad');
-    	$alumno -> zonaurbana = $request -> get('opciones4');
-    	$alumno -> autorizavacuna = $request -> get('opciones3');
-    	$alumno -> estado = $request -> get('estado');
-    	$alumno -> id_partida = $request -> get('idPartida');
-    	$alumno -> save();
-
-
-    	$partida = new PartidaNacimiento;
-    	$partida -> nie = $alumno->nie;
-    	$partida -> folio = $request ->get('folio');
-    	$partida -> libro = $request ->get('libro');
-    	$partida -> copiapartida =$request -> get('imagenPartida');
-    	$partida -> save();
-
-    	$responsable = new Responsable;
-    	$responsable -> id_responsable = $request-> get('idResponsable');
-    	$responsable -> nie = $alumno ->nie;
-    	$responsable -> nombre = $request -> get('nombreMadre');
-    	$responsable -> apellido = $request-> get('apellidoMadre');
-    	
-
-
-    	return Redirect::to('datos/Estudiante');
+  
     }
 
     public function show($id)		//Para mostrar
@@ -116,19 +86,39 @@ class EstudianteController extends Controller
     
     
 
-    public function update(EstudianteFormRequest $request, $id)
+    public function update(Request $request, $id)
     {	
         $estudiante = Estudiante::findOrFail($id);
         $estudiante-> nombre = $request->get('nombre');
         $estudiante-> apellido = $request->get('apellido');
-       # $estudiante-> nie = $request->get('nie');
+       #$estudiante-> nie = $request->get('nie');
         $estudiante-> fechadenacimiento = $request->get('fechadenacimiento');
         $estudiante-> domicilio = $request->get('domicilio');
         $estudiante-> enfermedad = $request->get('enfermedad');
-        $estudiante-> zonaurbana = $request->get('zonahabitacion');
+
+        if ($request->get('zonaurbana')==1) {
+            $estudiante-> zonaurbana = true;
+        } else {
+            $estudiante-> zonaurbana = false;
+        }
+        
+        
         $estudiante-> sexo = $request->get('sexo');
-        $estudiante-> discapacidad = $request->get('discapacidad');
-        $estudiante-> autorizavacuna = $request->get('autorizavacuna');
+
+        if ($request->get('discapacidad')==1) {
+            $estudiante-> discapacidad = true;
+        } else {
+            $estudiante-> discapacidad = false;
+        }
+        
+        
+        if ($request->get('autorizavacuna')==1) {
+           $estudiante-> autorizavacuna = true;
+        } else {
+            $estudiante-> autorizavacuna = false;
+        }
+        
+        
         $estudiante-> estado = true;
         $estudiante->update();
 

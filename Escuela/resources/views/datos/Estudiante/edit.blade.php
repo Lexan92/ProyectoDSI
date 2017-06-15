@@ -83,22 +83,24 @@
 			<div class="form-group col-md-3">
 				<label>Autorizacion de Vacunacion</label></br>
 				@if($estudiante->autorizavacuna==true)
-				<label><input type="radio"  name="autorizavacuna" id="opc3" value="0" checked="checked"> SI</label>
-				<label><input type="radio"  name="autorizavacuna" id="opc3" value="1"> NO</label>
+				<label><input type="radio"  name="autorizavacuna" id="opc3" value="1" checked="checked"> SI</label>
+				<label><input type="radio"  name="autorizavacuna" id="opc3" value="0"> NO</label>
 				@else
-				<label><input type="radio"  name="autorizavacuna" id="opc3" value="0" > SI</label>
-				<label><input type="radio"  name="autorizavacuna" id="opc3" value="1" checked="checked"> NO</label>	
+				<label><input type="radio"  name="autorizavacuna" id="opc3" value="1" > SI</label>
+				<label><input type="radio"  name="autorizavacuna" id="opc3" value="0" checked="checked"> NO</label>	
 				@endif
 		
 			</div>
 			<div class="form-group col-md-3">
 				<label>Area en la que reside</label></br>
 				@if($estudiante->zonaurbana==true)
-					<label><input type="radio"  name="zonahabitacion" id="opc4" value=true checked="checked"> Urbana</label>	
-				<label><input type="radio"  name="zonahabitacio" id="opc4" value=false> Rural</label>
+
+				<label><input type="radio"  name="zonaurbana" id="opc4" value="1" checked="checked"> Urbana</label>
+				<label><input type="radio"  name="zonaurbana" id="opc4" value="0"> Rural</label>
+
 				@else
-					<label><input type="radio"  name="zonahabitacion" id="opc4" value=true > Urbana</label>	
-				<label><input type="radio"  name="zonahabitacio" id="opc4" value=false checked="checked"> Rural</label>
+					<label><input type="radio"  name="zonaurbana" id="opc4" value="1" > Urbana</label>
+				<label><input type="radio"  name="zonaurbana" id="opc4" value="0" checked="checked"> Rural</label>
 				@endif
 				
 			</div>
