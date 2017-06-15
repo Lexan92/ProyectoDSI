@@ -60,10 +60,7 @@ class MatriculaController extends Controller
     		#->select('ma.id_matricula','al.nombre','ma.presentapartida','ma.certificadoprom','ma.presentafotos','ma.constanciaconducta','ma.eduacioninicial','ma.fechamatricula','ma.repitegrado','ma.fotografia','ma.estado','ma.cePrevio')
     		#->where('ma.id_matricula','LIKE','%'.$query.'%')
     		#->orderBy('i.id_matricula','desc')
-    		#->groupBy('ma.id_matricula','al.nombre','ma.presentapartida','ma.certificadoprom','ma.presentafotos','ma.constanciaconducta','ma.eduacioninicial','ma.fechamatricula','ma.repitegrado','ma.fotografia','ma.estado','ma.cePrevio')
-    		->paginate(7);
-    		return view('expediente.matricula.index',["matriculas"=>$matriculas,"searchText"=>$query]);
-    	}
+    
         else
         {
             $query = trim($request->get('searchText'));
@@ -78,7 +75,10 @@ class MatriculaController extends Controller
 
     public function create()
     {
-    	$tipos = DB::table('tipo_responsable')->get();
+    	$tipos = DB::table('tipo_responsable')->get(		#->groupBy('ma.id_matricula','al.nombre','ma.presentapartida','ma.certificadoprom','ma.presentafotos','ma.constanciaconducta','ma.eduacioninicial','ma.fechamatricula','ma.repitegrado','ma.fotografia','ma.estado','ma.cePrevio')
+    		->paginate(7);
+    		return view('expediente.matricula.index',["matriculas"=>$matriculas,"searchText"=>$query]);
+    	});
     	$grados = DB::table('grado')->get();
     	$secciones = DB::table('seccion')->get();
     	$turnos = DB::table('turno')->get();

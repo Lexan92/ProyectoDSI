@@ -36,6 +36,7 @@ class EstudianteController extends Controller
             ->join('detalle_grado as detalle_grado','matricula.iddetallegrado','=','detalle_grado.iddetallegrado','full outer')
             ->join('grado as grado','detalle_grado.idgrado','=','grado.idgrado','full outer')
             ->join('seccion as seccion','detalle_grado.idseccion','=','seccion.idseccion','full outer')
+            
             ->where('estudiante.nombre',$query1)
             ->orWhere('estudiante.apellido',$query2)
             #->orWhere('matricula.fechamatricula',$query4)
@@ -107,15 +108,31 @@ class EstudianteController extends Controller
     	$secciones = DB::table('seccion')->get();
     	$turnos = DB::table('turno')->get();
 
+        
+
         return view("datos.Estudiante.edit",["estudiante"=>Estudiante::findOrFail($id), "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos]);
     }
     
     
     
 
-    public function update(TipoResponsableFormRequest $request, $id)
+    public function update(EstudianteFormRequest $request, $id)
     {	
-    
+        $estudiante = Estudiante::findOrFail($id);
+        $estudiante-> nombre = $request->get('nombre');
+        $estudiante-> apellido = $request->get('apellido');
+       # $estudiante-> nie = $request->get('nie');
+        $estudiante-> fechadenacimiento = $request->get('fechadenacimiento');
+        $estudiante-> domicilio = $request->get('domicilio');
+        $estudiante-> enfermedad = $request->get('enfermedad');
+        $estudiante-> zonaurbana = $request->get('zonahabitacion');
+        $estudiante-> sexo = $request->get('sexo');
+        $estudiante-> discapacidad = $request->get('discapacidad');
+        $estudiante-> autorizavacuna = $request->get('autorizavacuna');
+        $estudiante-> estado = true;
+        $estudiante->update();
+
+        return Redirect::to('datos/Estudiante');
     }
 
     public function destroy($id)

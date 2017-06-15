@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::resource('datos/tipoResponsable','TipoResponsableController');
+Route::resource('datos/Responsable','ResponsableController');
 Route::resource('datos/Estudiante','EstudianteController');
 Route::resource('detalle/grado','GradoController');
 Route::resource('detalle/seccion','SeccionController');

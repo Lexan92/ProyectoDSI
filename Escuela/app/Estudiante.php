@@ -22,8 +22,7 @@ class Estudiante extends Model
     	'zonaurbana',
     	'autorizavacuna',
     	'estado',
-        'id',
-    	'estado'
+        
     ];
 
     protected $guarded = [
