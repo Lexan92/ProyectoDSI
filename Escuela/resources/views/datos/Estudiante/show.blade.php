@@ -26,11 +26,11 @@
 
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <img src="{{asset('imagenes/menus/notes.png')}}" alt="...">
+      <img src="{{asset('imagenes/menus/couple.png')}}" alt="...">
       <div class="caption">
       
         <p>
-          <a href="{{URL::action('ResponsableController@edit',$estudiante->nie)}}"
+          <a href="{{URL::action('ResponsableController@show',$estudiante->nie)}}"
            class="btn btn-primary" role="button">Editar Informacion Parental</a>
        
         </p>
@@ -40,7 +40,7 @@
 
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <img src="{{asset('imagenes/menus/notes.png')}}" alt="...">
+      <img src="{{asset('imagenes/menus/newspaper.png')}}" alt="...">
       <div class="caption">
       
         <p>
@@ -54,7 +54,7 @@
 
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <img src="{{asset('imagenes/menus/notes.png')}}" alt="...">
+      <img src="{{asset('imagenes/menus/documents.png')}}" alt="...">
       <div class="caption">
       
         <p>

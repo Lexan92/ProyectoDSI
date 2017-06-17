@@ -22,6 +22,7 @@ class EstudianteController extends Controller
     {
     	if($request)
     	{
+            //los query capturan los criterios de busqueda que son enviados desde el search.blade de estudiante
     	    $query1 = trim($request->get('searchNombre'));
             $query2 = trim($request->get('searchApellido'));
             $query3 = trim($request->get('searchNie'));
@@ -30,6 +31,8 @@ class EstudianteController extends Controller
             $query6 = $request->get('idseccion');
             $query7 = $request->get('idturno');
           
+          //la consulta es guardada en la variable $est recordar que join
+          //genera una nueva tabla con todos las columnas especificada en el select
     		$est = DB::table('estudiante')
             ->select('estudiante.nombre','estudiante.apellido','estudiante.nie','matricula.nie','grado.nombreGrado','seccion.nombreSeccion')
             ->join('matricula as matricula','estudiante.nie','=','matricula.nie','full outer')
@@ -48,7 +51,7 @@ class EstudianteController extends Controller
     	$secciones = DB::table('seccion')->get();
     	$turnos = DB::table('turno')->get();
 
-
+            //se retorna el array de resultados a la vista en una variable "estudiantes" y ademas los catalogos de turno,seccion y grado
             return view('datos.Estudiante.index',["estudiantes"=>$est,"searchNombre"=>$query1,"searchApellido"=>$query2,"searchNie"=>$query3, "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos]);
 
     	}
@@ -85,7 +88,7 @@ class EstudianteController extends Controller
     
     
     
-
+#AUN QUEDA POR RESOLVER EL CONTROL DEL ESTUDIANTEFORMREQUEST
     public function update(Request $request, $id)
     {	
         $estudiante = Estudiante::findOrFail($id);
@@ -121,8 +124,8 @@ class EstudianteController extends Controller
         
         $estudiante-> estado = true;
         $estudiante->update();
-
-        return Redirect::to('datos/Estudiante');
+        //se redirecciona al perfil actual del estudiante
+        return Redirect::to('datos/Estudiante/'.$id);
     }
 
     public function destroy($id)

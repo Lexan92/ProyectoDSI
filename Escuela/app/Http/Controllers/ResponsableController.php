@@ -6,8 +6,17 @@ use Illuminate\Http\Request;
 
 use Escuela\Http\Requests;
 
+use Escuela\Responsable;
+use Illuminate\Support\Facades\Redirect;
+use Escuela\Http\Request\ResponsableFormRequest;
+use DB;
+
 class ResponsableController extends Controller
 {
+    public function __construct()
+    {
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +24,7 @@ class ResponsableController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -47,7 +56,13 @@ class ResponsableController extends Controller
      */
     public function show($id)
     {
-        //
+        #$query = $request->get('nie');
+        $res= DB::table('responsable')
+        ->select('responsable.nombre','tipo_responsable.nombretipo','responsable.apellido','responsable.telefono','responsable.nie','responsable.id_persona')
+        ->join('tipo_responsable as tipo_responsable','tipo_responsable.idresponsable','=','responsable.idresponsable','full outer')
+        ->where('responsable.nie',$id)
+        ->get();
+        return view('datos.Responsable.show',["responsables"=>$res]);
     }
 
     /**
@@ -58,7 +73,7 @@ class ResponsableController extends Controller
      */
     public function edit($id)
     {
-        return "saludos desde Responsable Controler0";
+        return view("datos.Responsable.edit",["responsable"=>Responsable::findOrFail($id)]);
     }
 
     /**
@@ -70,7 +85,19 @@ class ResponsableController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $responsable= Responsable::findOrFail($id);
+        #$responsable->idresponsable = $request->get('idresponsable');
+        #$responsable->nie = $request->get('nie');
+        $responsable->nombre = $request->get('nombre');
+        $responsable->apellido = $request->get('apellido');
+        $responsable->ocupacion = $request->get('ocupacion');
+        $responsable->lugardetrabajo = $request->get('lugardetrabajo');
+        $responsable->telefono = $request->get('telefono');
+        $responsable->dui = $request->get('dui');
+        $responsable->update();
+
+        return Redirect::to('datos/Estudiante/'.$id);
+
     }
 
     /**

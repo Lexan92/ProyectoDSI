@@ -105,7 +105,7 @@
 				
 			</div>
 		</div>
-</fieldset
+</fieldset>
 
 
  <div class="form-group">
