@@ -17,14 +17,9 @@
 <fieldset class="well the-fieldset">
  <div class="col-md-12 col-md-offset-0">
    
-    @if($responsable->idresponsable=1)
+    @if($responsable->idresponsable==2)
     {!!Form::model($responsable,['method'=>'PATCH','route'=>['datos.Responsable.update',$responsable->nie]])!!}
 {{Form::token()}}
-    <p><input type="text" value={{$responsable->idresponsable}} name="idresponsable" hidden></p>
-    <p><input type="text" value={{$responsable->nie}} name="nie" hidden></p>
-
-        <fieldset class="well the-fieldset">
-	
 
 		<div class="col-md-12 col-md-offset-0">
 		<legend class="the-legend"><h2>Datos del Padre</h2></legend>
