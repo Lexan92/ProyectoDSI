@@ -17,7 +17,7 @@
             {{Form::token()}}
             <div class="form-group">
             	<label for="nombre">Nombre</label>
-            	<input type="text" name="nombre" class="form-control" value="{{$grado->nombre}}" placeholder="Nombre...">
+            	<input type="text" name="nombre" class="form-control" value="{{$grado->nombreGrado}}" placeholder="Nombre...">
             </div>
             
             <div class="form-group">

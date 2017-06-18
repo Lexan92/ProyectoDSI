@@ -24,8 +24,9 @@ class MatriculaFormRequest extends Request
     public function rules()
     {
         return [
-            'nie'=>'required',
-            #'iddetallegrado'=>'required',
+
+            //Matricula
+            'nie'=>'required|unique:matricula|min:6',
             'presentapartida'=>'required|max:50',
             'certificadoprom'=>'required|max:50',
             'presentafotos'=>'required|max:200',
@@ -35,7 +36,28 @@ class MatriculaFormRequest extends Request
             'repitegrado'=>'required',
             'fotografia'=>'mimes:jpeg,bmp,png,jpg',
             'cePrevio'=>'required',
-            #'estado'=>'required',
+
+            //PartidaNacimiento
+            'folio'=>'required',
+            'libro'=>'required',
+
+            //Estudiante
+            'nombre'=>'required|alpha_dash|max:50',
+            'apellido'=>'required|alpha_dash|max:50',
+            'fechadenacimiento'=>'required',
+            'sexo'=>'required',
+            'domicilio'=>'required',
+            'zonahabitacion'=>'required',
+            'autorizavacuna'=>'required',
+            'discapacidad'=>'required',
+
+            //Contacto de Emergencia
+            'nombre4'=>'required|alpha_dash|max:50',
+            'apellido4'=>'required|alpha_dash|max:50',
+            'telefono4'=>'required|min:8|max:8',
+
+
+
         ];
     }
 }

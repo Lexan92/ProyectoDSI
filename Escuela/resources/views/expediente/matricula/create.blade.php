@@ -16,7 +16,7 @@
 
 
 
-{!!Form::open(array('url'=>'expediente/matricula','method'=>'POST','autocomplete'=>'on', 'files'=>'true'))!!}
+{!!Form::open(array('url'=>'expediente/matricula','method'=>'POST','autocomplete'=>'off', 'files'=>'true'))!!}
             {{Form::token()}}
 
 <fieldset class="well the-fieldset">
@@ -28,7 +28,7 @@
 		<div class="col-md-12">
 			<div class="form-group col-md-3">
 				<label for="">Fecha de Matricula</label>
-				<input type="date" class="form-control" name="fechamatricula" autofocus placeholder="AAAA-MM-DD" required="">
+				<input type="date" class="form-control" name="fechamatricula" autofocus placeholder="AAAA-MM-DD" >
 			</div>
 			<div class="form-group col-md-3">
 				<div class="form-group">
@@ -101,7 +101,7 @@
 			</div>
 			<div class="form-group col-md-3">
 				<label>N°. Folio partida de nacimiento</label>
-				<input type="number" value="111" class="form-control" name="folio" autofocus placeholder="Folio..." required="">
+				<input type="number" value="111" class="form-control" name="folio" autofocus placeholder="Folio..." >
 			</div>
 			<div class="form-group col-md-3">
 				<label>N°. Libro partida de nacimiento</label>
@@ -112,7 +112,7 @@
 		<div class="col-md-12 col-md-offset-0">
 			<div class="form-group col-md-3">
 				<label for="">Nombres</label>
-				<input type="text" value="111" class="form-control" name="nombre" autofocus placeholder="Nombres Completos"required>
+				<input type="text" value="111" class="form-control" name="nombre" autofocus placeholder="Nombres Completos">
 			</div>
 			<div class="form-group col-md-3">
 				<label for="">Apellidos</label>
@@ -178,19 +178,15 @@
 		<legend class="the-legend"><h2>Datos de la Madre</h2></legend>
 			<div class="form-group col-md-3">
 				<label>Nombres de la Madre</label>
-				<input type="text" value="111" class="form-control" autofocus name="nombre2" placeholder="Nombres Completos" required="">
+				<input type="text" value="111" class="form-control" autofocus name="nombre2" placeholder="Nombres Completos" >
 			</div>
 			<div class="form-group col-md-3">
 				<label>Apellidos de la Madre</label>
-				<input type="text" value="111" class="form-control" autofocus name="apellido2" placeholder="Apellidos Completos" required="">
-			</div>
-			<div class="form-group col-md-3">
-				<label>Tipo responsable</label>
-				<input type="number" value="1" class="form-control" autofocus name="idresponsable1" placeholder="Apellidos Completos">
+				<input type="text" value="111" class="form-control" autofocus name="apellido2" placeholder="Apellidos Completos" >
 			</div>
 			<div class="form-group col-md-3">
 				<label>DUI de la Madre</label>
-				<input type="number" value="111" class="form-control" autofocus name="dui" placeholder="DUI sin guiones" required="">
+				<input type="number" value="111" class="form-control" autofocus name="dui" placeholder="DUI sin guiones">
 			</div>
 		</div>
 
@@ -209,8 +205,8 @@
 			</div>
 			<div class="form-group col-md-3">
 				<div class="form-group">
-					<label>Telefono de contacto de la Madre</label>
-					<input type="number" value="111" class="form-control" autofocus name="telefono" placeholder="Telefono principal de contacto" required="">
+					<label>Telefono de contacto  Madre</label>
+					<input type="number" value="111" class="form-control" autofocus name="telefono" placeholder="Telefono principal de contacto" >
 				</div>
 			</div>
 		</div>
@@ -228,10 +224,6 @@
 			<div class="form-group col-md-3">
 				<label>Apellidos del Padre</label>
 				<input type="text" value="111" class="form-control" autofocus name="apellido3" placeholder="Apellidos Completos">
-			</div>
-			<div class="form-group col-md-3">
-				<label>Tipo responsable</label>
-				<input type="number" value="1" class="form-control" autofocus name="idresponsable3" placeholder="Apellidos Completos">
 			</div>
 			<div class="form-group col-md-3">
 				<label>DUI del Padre</label>
@@ -267,16 +259,12 @@
 		<div class="col-md-12 col-md-offset-0">
 		<legend class="the-legend"><h2>Datos del Contacto de Emergencia</h2></legend>
 			<div class="form-group col-md-3">
-				<label>Nombres deL Contacto Emergencia</label>
-				<input type="text" value="111" class="form-control" autofocus name="nombre4" placeholder="Nombres Completos">
+				<label>Nombres del Contacto Emergencia</label>
+				<input type="text" value="111" class="form-control" autofocus name="nombre4" placeholder="Nombres Completos" required="">
 			</div>
 			<div class="form-group col-md-3">
 				<label>Apellidos del Contacto de Emergencia</label>
-				<input type="text" value="111" class="form-control" autofocus name="apellido4" placeholder="Apellidos Completos">
-			</div>
-			<div class="form-group col-md-3">
-				<label>Tipo responsable Contacto Emergencia</label>
-				<input type="number" value="1" class="form-control" autofocus name="idresponsable4" placeholder="Apellidos Completos">
+				<input type="text" value="111" class="form-control" autofocus name="apellido4" placeholder="Apellidos Completos" required="">
 			</div>
 			<div class="form-group col-md-3">
 				<div class="form-group">
@@ -286,14 +274,108 @@
 			</div>	
 		</div>
 </fieldset>
-</div>
 
-		<div class="form-group">
+<fieldset class="well the-fieldset">
+<div class="col-md-12 col-md-offset-0">
+		<legend class="the-legend"><h3>Tiene familiares estudiando dentro de la institución</h3></legend>
+		<div class="panel panel-primary">
+		<div class="panel-body">
+			<div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+				<div class="form-group">
+					<label for="matricula">Estudiante</label>
+					<select name="pid_matricula" class="form-control selectpicker" id="pid_matricula" data-Live-search="true">
+						@foreach($matriculas as $matricula)
+						<option value="{{ $matricula->id_matricula }}">{{$matricula->nie}}</option>
+						@endforeach
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+				<div class="form-group">
+					<label for="parentesco">Parentesco</label>
+					<input type="text" name="pparentesco" id="pparentesco" class="form-control" placeholder="Parentesco">
+				</div>
+			</div>
+			<div class="col-lg-2 col-sm-2 col-md-2 col-xs-12">
+				<div class="form-group">
+					<br>
+					<button type="button" id="bt_add" class="btn btn-primary" >Agregar</button>
+				</div>
+			</div>
+			<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+				<table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
+					<thead style="background-color: #A9D0F5">
+						<th>Opciones</th>
+						<th>Estudiante</th>
+						<th>Parentesco</th>
+					</thead>
+					<tfoot>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th></th>
+					</tfoot>
+					<tbody>
+						
+					</tbody>
+				</table>
+			</div>			
+		</div>
+	</div>
+</div>
+</fieldset>
+</div>
+		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12" id="guardar">
+			<div class="form-group">
+			<input name="_token" value="{{csrf_token()}}" type="hidden"></input>
             	<button class="btn btn-primary" type="submit">Guardar</button>
             	<button class="btn btn-danger" type="reset">Cancelar</button>
             </div>
-		{!!Form::close()!!}
-	</div>
-</div>
+		</div>
+		
+{!!Form::close()!!}
+
+@push('scripts')
+<script>
+
+	$(document).ready(function(){
+		$('#bt_add').click(function(){
+			agregar();
+		});
+	});
+
+	var cont = 0;
+	//$('#guardar').hide(); //Botón guardar inicialmente oculto
+
+	function agregar(){
+		id_matricula =$('#pid_matricula').val();
+		matricula=$("#pid_matricula option:selected").text();
+		parentesco =$('#pparentesco').val();
+
+		if(id_matricula!=" " && parentesco!=""){
+
+			var fila='<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-warning" onclick="eliminar('+cont+');">X</button></td><td><input type="hidden" name="id_matricula[]" value="'+id_matricula+'">'+matricula+'</td><td><input type="text" name="parentesco[]" value="'+parentesco+'"></td></tr>';
+			cont++;
+			limpiar();
+			$('#detalles').append(fila);
+		}
+		else{
+			alert("Error al ingresar parentesco");
+		}
+	}
+
+	
+	function limpiar(){
+		$("#pparentesco").val("");
+	}
+
+	function eliminar(index){
+		$("#fila"+index).remove();
+		evaluar();
+	}
+
+
+</script>
+@endpush
 
 @endsection

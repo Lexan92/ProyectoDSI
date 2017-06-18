@@ -37,6 +37,11 @@ use Escuela\Http\Requests\TurnoFormRequest;
 use DB;
 
 
+use Carbon\Carbon; //Para la zona fecha horaria
+use Response;
+use Illuminate\Support\Collection;  //Contienen los metodos a utilizar
+use Illuminate\Database\Connection;
+
 class MatriculaController extends Controller
 {
     public function __construct()	//para validar
@@ -55,22 +60,40 @@ class MatriculaController extends Controller
     		#->select('ma.id_matricula','al.nombre','ma.presentapartida','ma.certificadoprom','ma.presentafotos','ma.constanciaconducta','ma.eduacioninicial','ma.fechamatricula','ma.repitegrado','ma.fotografia','ma.estado','ma.cePrevio')
     		#->where('ma.id_matricula','LIKE','%'.$query.'%')
     		#->orderBy('i.id_matricula','desc')
-    		#->groupBy('ma.id_matricula','al.nombre','ma.presentapartida','ma.certificadoprom','ma.presentafotos','ma.constanciaconducta','ma.eduacioninicial','ma.fechamatricula','ma.repitegrado','ma.fotografia','ma.estado','ma.cePrevio')
-    		->paginate(7);
-    		return view('expediente.matricula.index',["matriculas"=>$matriculas,"searchText"=>$query]);
-    	}
+    
+        else
+        {
+            $query = trim($request->get('searchText'));
+            $tipos = DB::table('estudiante')->where('nombre','LIKE','%'.$query.'%')
+            ->orderBy('apellido','asc')
+            ->paginate(20);
+            return view('datos.Estudiante.index',["estudiantes"=>$tipos,"searchText"=>$query]);
+        }
 
     }
 
 
     public function create()
     {
-    	$tipos = DB::table('tipo_responsable')->get();
+    	$tipos = DB::table('tipo_responsable')->get(		#->groupBy('ma.id_matricula','al.nombre','ma.presentapartida','ma.certificadoprom','ma.presentafotos','ma.constanciaconducta','ma.eduacioninicial','ma.fechamatricula','ma.repitegrado','ma.fotografia','ma.estado','ma.cePrevio')
+    		->paginate(7);
+    		return view('expediente.matricula.index',["matriculas"=>$matriculas,"searchText"=>$query]);
+    	});
     	$grados = DB::table('grado')->get();
     	$secciones = DB::table('seccion')->get();
     	$turnos = DB::table('turno')->get();
+        $estudiantes = DB::table('estudiante')->get();
+        $matriculas = DB::table('matricula')->get();
 
-    	return view("expediente.matricula.create",["tipos"=>$tipos, "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos]);
+        #$matriculas = DB::table('matricula as mat')
+        #->select(DB::raw('CONCAT(mat.id_matricula, " ", mat.estado) AS matricula'),'mat.id_matricula')
+        #->where('mat.estado','=','Activo')
+        #->get();
+
+        #$raw=DB::raw("CONCAT(id_matricula, ' ', estado) as matricula");
+        #$matriculas = Matricula::select($raw)->get();
+
+    	return view("expediente.matricula.create",["tipos"=>$tipos, "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos, "estudiantes"=>$estudiantes, "matriculas"=>$matriculas]);
     }
 
 
@@ -136,25 +159,68 @@ class MatriculaController extends Controller
     		$partida->nie = $estudiante->nie;
     		$partida->save();
 
-    		//Se procede a guardar Responsables del alumno
+    		//Se procede a guardar datos de la Madre
+
+    		$madre = new Responsable;
+    		$madre->idresponsable=1;
+    		$madre->nie=$estudiante->nie;
+    		$madre->nombre =$request->get('nombre2');
+    		$madre->apellido =$request->get('apellido2');
+    		$madre->ocupacion =$request->get('ocupacion');
+    		$madre->lugardetrabajo =$request->get('lugardetrabajo');
+    		$madre->telefono =$request->get('telefono');
+    		$madre->dui =$request->get('dui');
+    		$madre->save();
+
+            
+            //Se procede a guardar datos de la Padre
+            $padre = new Responsable;
+            $padre->idresponsable=2;
+            $padre->nie=$estudiante->nie;
+            $padre->nombre =$request->get('nombre3');
+            $padre->apellido =$request->get('apellido3');
+            $padre->ocupacion =$request->get('ocupacion3');
+            $padre->lugardetrabajo =$request->get('lugardetrabajo3');
+            $padre->telefono =$request->get('telefono3');
+            $padre->dui =$request->get('dui3');
+            $padre->save();
 
 
-    		$responsable = new Responsable;
-    		$responsable->idresponsable=$request->get('idresponsable1');
-    		$responsable->nie=$estudiante->nie;
-    		$responsable->nombre =$request->get('nombre2');
-    		$responsable->apellido =$request->get('apellido2');
-    		$responsable->ocupacion =$request->get('ocupacion');
-    		$responsable->lugardetrabajo =$request->get('lugardetrabajo');
-    		$responsable->telefono =$request->get('telefono');
-    		$responsable->dui =$request->get('dui');
-    		$responsable->save();
-
+            //Se procede a guardar datos del Contacto de Emergencia
+            $contacto = new Responsable;
+            $contacto->idresponsable=3;
+            $contacto->nie=$estudiante->nie;
+            $contacto->nombre =$request->get('nombre4');
+            $contacto->apellido =$request->get('apellido4');
+            $contacto->ocupacion =$request->get('ocupacion4');
+            $contacto->lugardetrabajo =$request->get('lugardetrabajo4');
+            $contacto->telefono =$request->get('telefono4');
+            $contacto->dui =$request->get('dui4');
+            $contacto->save();
+        
+        
     		//Se procede a guardar la matricula
     		$matricula->nie = $estudiante->nie;
-    		$matricula -> save();
+    		#$matricula -> save();
 
-    		
+
+            $id_matricula = $request->get('id_matricula');
+            $nie = $estudiante->nie;
+            $parentesco = $request->get('parentesco');
+
+
+            $cont = 0;
+
+            while ( $cont < count($id_matricula)) {
+                $detalle = new DetallePariente();
+                $detalle->nie = $estudiante->nie;
+                $detalle->id_matricula = $id_matricula[$cont];
+                $detalle->parentesco = $parentesco[$cont];
+                $detalle->save();  
+                $cont =$cont+1;
+            }
+
+            $matricula -> save();    		
 
     	return Redirect::to('expediente/matricula');
     }

@@ -62,3 +62,13 @@ Route::group(['middleware' => 'usuarioStandard'], function () {
 
 });
 
+<<<<<<< HEAD
+=======
+Route::resource('datos/tipoResponsable','TipoResponsableController');
+Route::resource('datos/Responsable','ResponsableController');
+Route::resource('datos/Estudiante','EstudianteController');
+Route::resource('detalle/grado','GradoController');
+Route::resource('detalle/seccion','SeccionController');
+Route::resource('detalle/turno','TurnoController');
+Route::resource('expediente/matricula','MatriculaController');
+>>>>>>> origin/Sprint2
