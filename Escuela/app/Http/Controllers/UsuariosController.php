@@ -49,7 +49,7 @@ class UsuariosController extends Controller {
         
         $usuarioactual=\Auth::user();
         $tiposusuario=TipoUsuario::all();
-		return view('formularios.form_nuevo_usuario')->with("tiposusuario",$tiposusuario)->with("usuario", $usuarioactual );  
+		return view('formularios.form_nuevo_usuario')->with("tiposusuario",$tiposusuario)->with("usuarioactual", $usuarioactual );  
 		
 	}
 
@@ -61,14 +61,14 @@ class UsuariosController extends Controller {
         $usuarios= User::paginate(20);  
         return view('listados.listado_usuarios')
         ->with("usuarios", $usuarios )
-        ->with("usuario_actual", $usuarioactual )->with("tiposusuario",$tipousuario);     
+        ->with("usuarioactual", $usuarioactual )->with("tiposusuario",$tipousuario);     
 	}
 
 
 	//presenta el formulario para nuevo usuario
 	public function agregar_nuevo_usuario(Request $request)
 	{
-
+        
         $data=$request->all();
 
 
@@ -119,18 +119,20 @@ class UsuariosController extends Controller {
 		}
 	}
 
-//leccion 7
+
 	public function form_editar_usuario($id)
 	{
 		//funcion para cargar los datos de cada usuario en la ficha
+		$usuarioactual=\Auth::user();
 		$usuario=User::find($id);
 		$contador=count($usuario);
-		$tiposUsuario=TipoUsuario::all();
+		$tiposusuario=TipoUsuario::all();
 		
 		if($contador>0){          
-            return view('formularios.editar_usuario', compact('usuario'))
+            return view("formularios.editar_usuario")
+                   ->with("usuarioactual", $usuarioactual )
                    ->with("usuario",$usuario)
-                   ->with("tiposUsuario",$tiposUsuario);   
+                   ->with("tiposusuario",$tiposusuario);   
 		}
 		else
 		{            
@@ -138,36 +140,25 @@ class UsuariosController extends Controller {
 		}
 	}
 
-    public function eliminar($id){
-    	$user->User::find($id);
-    	$user->delete();
-    }
+   
 
-
-		public function editar_usuario(UsuarioRequest $request)
+		public function editar_usuario($id,Request $request)
 	{
 
 
 
-       $data=$request->all();
-        $reglas = array('nombres' => 'required',
-        	            'apellidos' => 'required',
-        	            'pais'=>   'required',
-        	            'ciudad' => 'required|Alpha',
-        	            'institucion' => 'required|Alpha',
-        	            'ocupacion' => 'required|Alpha',
-        	            'tipousuario' => 'required|Numeric|min:1|max:2',
+        $data=$request->all();
+        /*$reglas = array('name' => 'required|Unique:users',
+        	             'email' => 'required|Email|Unique:users',
+        	             'tipoUsuario' => 'required|Numeric|min:1|max:2',
         	            );
-        $mensajes= array('nombres.required' =>  'Ingresar Nombres es obligatorio',
-        	             'apellidos.required' =>  'Ingresar Apellidos es obligatorio',
-        	             'pais.required' =>  'el pais es un campo obligatorio',
-        	             'ciudad.required' =>  'Ingresar una ciudad es obligatorio',
-        	             'ciudad.alpha' =>  'la ciudad no puede contener numeros en su nombre',
+        $mensajes= array('name.required' =>  'Ingresar Nombres es obligatorio',
+        	             'name.unique' =>  'Ya existe el Usuario, favor ingresar otro nombre',
         	             'email.required' =>  'Ingresar un email es obligatorio',
         	             'email.email' =>  'el email debe tener un formato valido',
-        	             'institucion.required' =>  'Ingresar una institucion es obligatorio',
-        	             'ocupacion.required' =>  'Ingresar la ocupacion es obligatorio',
-        	             'tipousuario.numeric' =>  'Ingresar un tipo de usuario valido ides entre 1 y 2',
+        	             'email.unique' =>  'el email debe ser unico en la base de datos',
+        	             
+        	             'tipoUsuario.numeric' =>  'Ingresar un tipo de usuario valido',
         	             );
         
 
@@ -180,12 +171,25 @@ class UsuariosController extends Controller {
 	         return view("mensajes.msj_rechazado")->with("msj","Existen errores de validación")
 			                                      ->with("errores",$errores); 			          
         }
+        $usuario = user::find($id);
+    	$usuario -> nombreGrado = $request -> get('nombre');
+    	$grado -> estado = 'Activo';
+    	$grado -> update();*/
 
-		$idUsuario=$data["id"];
+    	/*return Redirect::to('detalle/grado');*/
+
+		
 		$usuario=User::find($idUsuario);
-        $usuario->name  =  $data["name"];
-		$usuario->tipoUsuario=$data['tipoUsuario'];
-		$resul= $usuario->save();
+        $usuario->name  =  get('name');
+		$usuario->email= get('email');
+        $usuario->tipoUsuario= get('tipoUsuario');
+		$usuario->password= bcrypt(get('password'));
+		
+		$resul= $usuario->update();
+
+
+  		
+		
 
 		if($resul){            
             return view("mensajes.msj_correcto")->with("msj","Datos actualizados Correctamente");   

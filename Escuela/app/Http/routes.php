@@ -31,12 +31,13 @@ Route::group(['middleware' => 'guest'], function () {//GRUPO DE URL DE USUARIO S
     Route::get('register', 'Auth\AuthController@tregistro'); 
     Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\AuthController@postRegister']);*/
 	
-	  Route::resource('datos/tipoResponsable','TipoResponsableController');
-    Route::resource('datos/Estudiante','EstudianteController');
-    Route::resource('detalle/grado','GradoController');
-    Route::resource('detalle/seccion','SeccionController');
-    Route::resource('detalle/turno','TurnoController');
-    Route::resource('expediente/matricula','MatriculaController');
+Route::resource('datos/tipoResponsable','TipoResponsableController');
+Route::resource('datos/Responsable','ResponsableController');
+Route::resource('datos/Estudiante','EstudianteController');
+Route::resource('detalle/grado','GradoController');
+Route::resource('detalle/seccion','SeccionController');
+Route::resource('detalle/turno','TurnoController');
+Route::resource('expediente/matricula','MatriculaController');
 
 });
 
@@ -45,11 +46,12 @@ Route::group(['middleware' => 'guest'], function () {//GRUPO DE URL DE USUARIO S
 //grupo de rutas de usuario administrador
    
       Route::group(['middleware' => 'usuarioAdmin'], function () {
-      Route::get('form_editar_usuario/{id}', 'UsuariosController@form_editar_usuario');
-      Route::post('editar_usuario', 'UsuariosController@editar_usuario');
-      Route::get('form_nuevo_usuario', 'UsuariosController@form_nuevo_usuario');
+      
+      Route::get('form_nuevo_usuario', ['as' => 'form_nuevo_usuario', 'uses' => 'UsuariosController@form_nuevo_usuario']);
       Route::post('agregar_nuevo_usuario', 'UsuariosController@agregar_nuevo_usuario');
-      Route::get('listado_usuarios/{page?}', 'UsuariosController@listado_usuarios');
+      Route::get('listado_usuarios/{page?}', ['as' => 'listado_usuarios/{page?}', 'uses' => 'UsuariosController@listado_usuarios']);
+       Route::get('form_editar_usuario/{id}', 'UsuariosController@form_editar_usuario');
+      Route::post('editar_usuario', 'UsuariosController@editar_usuario');
       
 });
 
@@ -62,8 +64,7 @@ Route::group(['middleware' => 'usuarioStandard'], function () {
 
 });
 
-<<<<<<< HEAD
-=======
+
 Route::resource('datos/tipoResponsable','TipoResponsableController');
 Route::resource('datos/Responsable','ResponsableController');
 Route::resource('datos/Estudiante','EstudianteController');
@@ -71,4 +72,4 @@ Route::resource('detalle/grado','GradoController');
 Route::resource('detalle/seccion','SeccionController');
 Route::resource('detalle/turno','TurnoController');
 Route::resource('expediente/matricula','MatriculaController');
->>>>>>> origin/Sprint2
+

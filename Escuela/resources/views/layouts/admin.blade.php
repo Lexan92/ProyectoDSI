@@ -47,7 +47,7 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <span class="fa fa-user">&nbsp;&nbsp;<?= $usuario->name ?></span>
+                  <span class="fa fa-user">&nbsp;&nbsp;<?= $usuarioactual->name ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
@@ -127,8 +127,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-              <li><a href="form_nuevo_usuario"><i class="fa fa-circle-o"></i> Agregar usuario</a></li>
-              <li><a href="listado_usuarios"><i class="fa fa-circle-o"></i>Listado Usuarios</a></li>
+              <li><a href="{{ route('form_nuevo_usuario') }}"><i class="fa fa-circle-o"></i> Agregar usuario</a></li>
+              <li><a href="{{ route('listado_usuarios/{page?}')}}"><i class="fa fa-circle-o"></i>Listado Usuarios</a></li>
 
               </ul>
             </li>-->

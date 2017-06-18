@@ -38,7 +38,7 @@ class HomeController extends Controller {
        $usuarioactual=\Auth::user();
       
 
-		return view('/layouts/admin')->with("usuario",  $usuarioactual);
+		return view('/layouts/admin')->with("usuarioactual",  $usuarioactual);
 	}
 
 }

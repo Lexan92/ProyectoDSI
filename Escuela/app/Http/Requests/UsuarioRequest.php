@@ -30,13 +30,9 @@ class UsuarioRequest extends Request
     public function rules()
     {
         return [
-                        'nombres' => 'required',
-                        'apellidos' => 'required',
-                        'pais'=>   'required',
-                        'ciudad' => 'required|Alpha',
-                        'institucion' => 'required|Alpha',
-                        'ocupacion' => 'required|Alpha',
-                        'tipousuario' => 'required|Numeric|min:1|max:2',
+                         'name' => 'required|Unique:users',
+                         'email' => 'required|Email|Unique:users',
+                         'tipoUsuario' => 'required|Numeric|min:1|max:2',
               ];
     }
 
@@ -44,17 +40,13 @@ class UsuarioRequest extends Request
        public function messages()
     {
         return [
-            
-            'nombres.required' =>  'Ingresar Nombres es obligatorio',
-                         'apellidos.required' =>  'Ingresar Apellidos es obligatorio',
-                         'pais.required' =>  'el pais es un campo obligatorio',
-                         'ciudad.required' =>  'Ingresar una ciudad es obligatorio',
-                         'ciudad.alpha' =>  'la ciudad no puede contener numeros en su nombre',
+                         'name.required' =>  'Ingresar Nombres es obligatorio',
+                         'name.unique' =>  'Ya existe el Usuario, favor ingresar otro nombre',
                          'email.required' =>  'Ingresar un email es obligatorio',
                          'email.email' =>  'el email debe tener un formato valido',
-                         'institucion.required' =>  'Ingresar una institucion es obligatorio',
-                         'ocupacion.required' =>  'Ingresar la ocupacion es obligatorio',
-                         'tipousuario.numeric' =>  'Ingresar un tipo de usuario valido ides entre 1 y 2',
+                         'email.unique' =>  'el email debe ser unico en la base de datos',
+                         
+                         'tipoUsuario.numeric' =>  'Ingresar un tipo de usuario valido',
           
                ];
     }

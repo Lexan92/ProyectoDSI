@@ -77,7 +77,7 @@ class AuthController extends Controller
     
        $usuarioactual=\Auth::user();
       
-       return view('/layouts/admin')->with("usuario",  $usuarioactual);
+       return view('/layouts/admin')->with("usuarioactual",  $usuarioactual);
        
        //CAMBIAR RUTA A LA FUNCIONAL
     }
@@ -95,7 +95,7 @@ class AuthController extends Controller
         protected function getRegister()
     {
        $usuarioactual=\Auth::user();
-       return view("registro")->with("usuario",  $usuarioactual);
+       return view("registro")->with("usuarioactual",  $usuarioactual);
     }
 
 

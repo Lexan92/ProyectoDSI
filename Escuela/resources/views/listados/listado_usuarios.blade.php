@@ -57,7 +57,7 @@ if( count($usuarios) >0){
     <td><?= $usuario->email;  ?></td>
     <td><span class="label label-primary "><?= $usuario->tipo($usuario->tipoUsuario);   ?></span></td>
     <td><?= $usuario->created_at;  ?></td>
-     <td><a  href="" class="btn btn-primary">Editar</a>&nbsp;<a type="submit" action="eliminar" class="btn btn-primary label-danger">Eliminar</a></td>
+     <td><a  href="form_editar_usuario/{{$usuario->id}}" class="btn btn-primary">Editar</a>&nbsp;<a type="submit" action="eliminar" class="btn btn-primary label-danger">Eliminar</a></td>
 
     
 </tr>
