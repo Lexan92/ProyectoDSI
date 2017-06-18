@@ -18,9 +18,9 @@
  <div class="col-md-12 col-md-offset-0">
    
     @if($responsable->idresponsable==2)
-    {!!Form::model($responsable,['method'=>'PATCH','route'=>['datos.Responsable.update',$responsable->nie]])!!}
+    {!!Form::model($responsable,['method'=>'PATCH','route'=>['datos.Responsable.update',$responsable->id_persona]])!!}
 {{Form::token()}}
-
+<fieldset class="well the-fieldset">
 		<div class="col-md-12 col-md-offset-0">
 		<legend class="the-legend"><h2>Datos del Padre</h2></legend>
 			<div class="form-group col-md-3">
@@ -65,7 +65,7 @@
 
 {!!Form::close()!!}
     @else
-      {!!Form::model($responsable,['method'=>'PATCH','route'=>['datos.Responsable.update',$responsable->nie]])!!}
+      {!!Form::model($responsable,['method'=>'PATCH','route'=>['datos.Responsable.update',$responsable->id_persona]])!!}
 {{Form::token()}}
         		<legend class="the-legend"><h2>Datos de la Madre</h2></legend>
 			<div class="form-group col-md-3">

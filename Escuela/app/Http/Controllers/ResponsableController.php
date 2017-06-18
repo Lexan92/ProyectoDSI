@@ -96,7 +96,7 @@ class ResponsableController extends Controller
         $responsable->dui = $request->get('dui');
         $responsable->update();
 
-        return Redirect::to('datos/Estudiante/'.$id);
+        return Redirect::to('datos/Estudiante/'.$responsable->nie);
 
     }
 
