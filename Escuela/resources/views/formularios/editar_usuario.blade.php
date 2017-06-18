@@ -16,7 +16,9 @@
 
 
 
-        <form  id="f_editar_usuario"  method="post"  action="editar_usuario" class="form-horizontal form_entrada" >                
+       <form action="{{ url('editar_usuario')}}/{{$usuario->id}}" method="post">
+     {{ csrf_field() }}{{ method_field('PUT') }}
+                   
           <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"> 
           
           <input type="hidden" name="id_usuario" value="<?= $usuario->id; ?>">              

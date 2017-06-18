@@ -7,14 +7,7 @@ use Storage;
 use Illuminate\Http\Request;
 use Escuela\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Excel;
-use Escuela\Pais;
 use Escuela\TipoUsuario;
-use Escuela\Educacion;
-use Escuela\TipoEducacion;
-use Escuela\Publicaciones;
-use Escuela\TipoPublicaciones;
-use Escuela\Proyectos;
 use Escuela\Http\Requests\UsuarioRequest;
 use Illuminate\Http\JsonResponse;
 
@@ -119,7 +112,7 @@ class UsuariosController extends Controller {
 		}
 	}
 
-
+ 
 	public function form_editar_usuario($id)
 	{
 		//funcion para cargar los datos de cada usuario en la ficha
@@ -142,13 +135,14 @@ class UsuariosController extends Controller {
 
    
 
-		public function editar_usuario($id,Request $request)
+		/*public function editar_usuario(Request $request)
 	{
 
 
 
+      
         $data=$request->all();
-        /*$reglas = array('name' => 'required|Unique:users',
+        $reglas = array('name' => 'required|Unique:users',
         	             'email' => 'required|Email|Unique:users',
         	             'tipoUsuario' => 'required|Numeric|min:1|max:2',
         	            );
@@ -171,12 +165,12 @@ class UsuariosController extends Controller {
 	         return view("mensajes.msj_rechazado")->with("msj","Existen errores de validación")
 			                                      ->with("errores",$errores); 			          
         }
-        $usuario = user::find($id);
+        /*$usuario = user::find($id);
     	$usuario -> nombreGrado = $request -> get('nombre');
     	$grado -> estado = 'Activo';
-    	$grado -> update();*/
+    	$grado -> update();
 
-    	/*return Redirect::to('detalle/grado');*/
+    	return Redirect::to('detalle/grado');
 
 		
 		$usuario=User::find($idUsuario);
@@ -187,9 +181,19 @@ class UsuariosController extends Controller {
 		
 		$resul= $usuario->update();
 
+        $usuario=User::find($idUsuario);
+        $usuario->name  =   $request->get('name');
+		$usuario->email=  $request->get('email');
+        $usuario->tipoUsuario=  $request->get('tipoUsuario');
+		$usuario->password=  $request->bcrypt(get('password'));
+  		$resul= $usuario->update();
+		   $usuario = User::find($id);
+           $usuario->name  =   $request->name;
+           $usuario->email=  $request->email;
+           $usuario->tipoUsuario=  $request->tipoUsuario;
+           $usuario->password=  $request->password;
+           $usuario->save();
 
-  		
-		
 
 		if($resul){            
             return view("mensajes.msj_correcto")->with("msj","Datos actualizados Correctamente");   
@@ -200,8 +204,8 @@ class UsuariosController extends Controller {
 		}
 	}
 
-/*
-		public function subir_imagen_usuario(Request $request)
+
+	/*	public function subir_imagen_usuario(Request $request)
 	{
 
 	    $id=$request->input('id_usuario_foto');
@@ -236,8 +240,8 @@ class UsuariosController extends Controller {
 
         }	
 
-	}*/
-
+	}
+    
 
 	public function cambiar_password(Request $request){
         $email=$request->input("email_usuario");
@@ -310,7 +314,7 @@ class UsuariosController extends Controller {
       
        return view("mensajes.msj_rechazado")->with("msj","Existen errores de validacion");
 
-	}
+	}*/
 
 
 
