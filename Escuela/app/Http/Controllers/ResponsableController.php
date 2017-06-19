@@ -56,13 +56,14 @@ class ResponsableController extends Controller
      */
     public function show($id)
     {
+        $usuarioactual=\Auth::user();
         #$query = $request->get('nie');
         $res= DB::table('responsable')
         ->select('responsable.nombre','tipo_responsable.nombretipo','responsable.apellido','responsable.telefono','responsable.nie','responsable.id_persona')
         ->join('tipo_responsable as tipo_responsable','tipo_responsable.idresponsable','=','responsable.idresponsable','full outer')
         ->where('responsable.nie',$id)
         ->get();
-        return view('datos.Responsable.show',["responsables"=>$res]);
+        return view('datos.Responsable.show',["responsables"=>$res,"usuarioactual"=>$usuarioactual]);
     }
 
     /**
@@ -73,7 +74,8 @@ class ResponsableController extends Controller
      */
     public function edit($id)
     {
-        return view("datos.Responsable.edit",["responsable"=>Responsable::findOrFail($id)]);
+        $usuarioactual=\Auth::user();
+        return view("datos.Responsable.edit",["responsable"=>Responsable::findOrFail($id),"usuarioactual"=>$usuarioactual]);
     }
 
     /**
@@ -85,6 +87,7 @@ class ResponsableController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $usuarioactual=\Auth::user();
         $responsable= Responsable::findOrFail($id);
         #$responsable->idresponsable = $request->get('idresponsable');
         #$responsable->nie = $request->get('nie');

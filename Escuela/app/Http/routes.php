@@ -17,6 +17,10 @@ Route::group(['middleware' => 'guest'], function () {//GRUPO DE URL DE USUARIO S
   Route::get('/', 'Auth\AuthController@getLogin');
 	Route::get('login', 'Auth\AuthController@getLogin');
 	Route::post('login', ['as' =>'login', 'uses' => 'Auth\AuthController@postLogin']); 
+
+     /*Route::get('register', 'Auth\AuthController@getRegister');
+    Route::get('register', 'Auth\AuthController@tregistro'); 
+    Route::post('register', ['as' => 'auth/register', 'uses' => 'Auth\AuthController@postRegister']);*/
 });
 
 
@@ -52,6 +56,14 @@ Route::resource('expediente/matricula','MatriculaController');
       Route::get('listado_usuarios/{page?}', ['as' => 'listado_usuarios/{page?}', 'uses' => 'UsuariosController@listado_usuarios']);
        Route::get('form_editar_usuario/{id}', 'UsuariosController@form_editar_usuario');
       Route::post('editar_usuario', 'UsuariosController@editar_usuario');
+
+      Route::resource('datos/tipoResponsable','TipoResponsableController');
+Route::resource('datos/Responsable','ResponsableController');
+Route::resource('datos/Estudiante','EstudianteController');
+Route::resource('detalle/grado','GradoController');
+Route::resource('detalle/seccion','SeccionController');
+Route::resource('detalle/turno','TurnoController');
+Route::resource('datos/Partida','PartidaController');
       
 });
 
@@ -72,4 +84,5 @@ Route::resource('detalle/grado','GradoController');
 Route::resource('detalle/seccion','SeccionController');
 Route::resource('detalle/turno','TurnoController');
 Route::resource('expediente/matricula','MatriculaController');
+Route::resource('datos/Partida','PartidaController');
 

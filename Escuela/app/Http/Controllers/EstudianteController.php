@@ -18,8 +18,14 @@ class EstudianteController extends Controller
         #$this->middleware('auth');
     }
 
+    
+
     public function index(Request $request)
     {
+       $usuarioactual=\Auth::user();
+		
+	
+		
     	if($request)
     	{
             //los query capturan los criterios de busqueda que son enviados desde el search.blade de estudiante
@@ -52,7 +58,7 @@ class EstudianteController extends Controller
     	$turnos = DB::table('turno')->get();
 
             //se retorna el array de resultados a la vista en una variable "estudiantes" y ademas los catalogos de turno,seccion y grado
-            return view('datos.Estudiante.index',["estudiantes"=>$est,"searchNombre"=>$query1,"searchApellido"=>$query2,"searchNie"=>$query3, "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos]);
+            return view('datos.Estudiante.index',["estudiantes"=>$est,"searchNombre"=>$query1,"searchApellido"=>$query2,"searchNie"=>$query3, "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos,"usuarioactual"=>$usuarioactual]);
 
     	}
     	
@@ -71,11 +77,16 @@ class EstudianteController extends Controller
 
     public function show($id)		//Para mostrar
     {
-    	return view("datos.Estudiante.show",["estudiante"=>Estudiante::findOrFail($id)]);
+        $usuarioactual=\Auth::user();
+		
+		
+    	return view("datos.Estudiante.show",["estudiante"=>Estudiante::findOrFail($id),"usuarioactual"=>$usuarioactual]);
     }
 
     public function edit($id)
     {
+        $usuarioactual=\Auth::user();
+		
         //catalogos de grados,secciones y turnos
         $grados = DB::table('grado')->get();
     	$secciones = DB::table('seccion')->get();
@@ -83,14 +94,16 @@ class EstudianteController extends Controller
 
         
 
-        return view("datos.Estudiante.edit",["estudiante"=>Estudiante::findOrFail($id), "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos]);
+        return view("datos.Estudiante.edit",["estudiante"=>Estudiante::findOrFail($id), "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos,"usuarioactual"=>$usuarioactual]);
     }
     
     
     
-#AUN QUEDA POR RESOLVER EL CONTROL DEL ESTUDIANTEFORMREQUEST
     public function update(Request $request, $id)
     {	
+        $usuarioactual=\Auth::user();
+		
+
         $estudiante = Estudiante::findOrFail($id);
         $estudiante-> nombre = $request->get('nombre');
         $estudiante-> apellido = $request->get('apellido');

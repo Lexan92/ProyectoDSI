@@ -24,7 +24,6 @@
 	<legend class="the-legend"><h1 style="text-align: center;">FORMULARIO DE MATRICULA</h1></legend>
 </div>
 	<div class="row">
-
 		<div class="col-md-12">
 			<div class="form-group col-md-3">
 				<label for="">Fecha de Matricula</label>
