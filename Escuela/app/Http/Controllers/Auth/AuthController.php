@@ -1,16 +1,12 @@
 <?php
 
 namespace Escuela\Http\Controllers\Auth;
+
 use Escuela\User;
 use Validator;
 use Escuela\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Http\Request;
-use Session;
-use Escuela\TipoUsuario;
 
 class AuthController extends Controller
 {
@@ -27,17 +23,21 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    /**
+     * Where to redirect users after login / registration.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/';
 
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct(Guard $auth)
+    public function __construct()
     {
-        $this->auth = $auth;
-        $this->middleware('guest', ['except' => 'getLogout']);
-      
+        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
     /**
@@ -46,118 +46,27 @@ class AuthController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-   
-
-
-//login
-
-       protected function getLogin()
+    protected function validator(array $data)
     {
-        return view("login");
+        return Validator::make($data, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+        ]);
     }
 
-
-       
-
-        public function postLogin(Request $request)
-   {
-    $this->validate($request, [
-        'name' => 'required',
-        'password' => 'required',
-    ]);
-
-
-
-    $credentials = $request->only('name', 'password');
-
-
-
-    if ($this->auth->attempt($credentials, $request->has('remember')))
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return User
+     */
+    protected function create(array $data)
     {
-    
-       $usuarioactual=\Auth::user();
-
-       if($usuarioactual->tipoUsuario==1){// SI EL USUARIO ES ADMIN MUESTRA EL VIEW DE ADMIN
-      
-       return view('/layouts/admin')->with("usuarioactual",  $usuarioactual);
-       }
-    else
-        return view('layouts/standar')->with("usuarioactual", $usuarioactual);// SI EL USUARIO ES DIFERENTE A 1 MUSTRA POR LE MOMENTO USUARIO STANDAR
-       //CAMBIAR RUTA A LA FUNCIONAL
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
     }
-
-    return "credenciales incorrectas";
-
-    }
-
-
-//login
-
- //registro   
-
-
-        protected function getRegister()
-    {
-       $usuarioactual=\Auth::user();
-       return view("registro")->with("usuarioactual",  $usuarioactual);
-    }
-
-
-        
-
-        protected function postRegister(Request $request)
-
-   {
-    $this->validate($request, [
-        'name' => 'required',
-        'email' => 'required',
-        'password' => 'required',
-        'tipoUsuario' => 'required',
-    ]);
-
-
-    $data = $request;
-
-
-    $user=new User;
-    $user->name=$data['name'];
-    $user->email=$data['email'];
-    $user->password=bcrypt($data['password']);
-    $user->tipoUsuario=$data['tipoUsuario'];
-    
-    if($user->save()){
-
-         return "se ha registrado correctamente el usuario";
-               
-    }
-   
-
-   
-
-}
-public function tregistro()
-    {
-        
-
-        $tiposusuario=TipoUsuario::all();
-        return view('registro')->with("tiposusuario",$tiposusuario);
-        
-    }
-
-//registro
-
-protected function getLogout()
-    {
-        $this->auth->logout();
-
-        Session::flush();
-
-        return redirect('login');
-    }
-
-
-
-
-
-
 }

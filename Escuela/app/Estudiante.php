@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Estudiante extends Model
 {
     protected $table = 'estudiante';
-    protected $primaryKey = 'nie';
+    protected $primarykey = 'nie';
     public $timestamps = false;
 
     protected $fillable= [
@@ -22,7 +22,8 @@ class Estudiante extends Model
     	'zonaurbana',
     	'autorizavacuna',
     	'estado',
-        
+        'id',
+    	'estado'
     ];
 
     protected $guarded = [

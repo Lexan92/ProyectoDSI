@@ -26,34 +26,45 @@ class MatriculaFormRequest extends Request
         return [
 
             //Matricula
-            'nie'=>'required|unique:matricula|min:6',
-            'presentapartida'=>'required|max:50',
-            'certificadoprom'=>'required|max:50',
-            'presentafotos'=>'required|max:200',
-            'constanciaconducta'=>'required',
-            'educacioninicial'=>'required',
             'fechamatricula'=>'required',
-            'repitegrado'=>'required',
             'fotografia'=>'mimes:jpeg,bmp,png,jpg',
-            'cePrevio'=>'required',
+            'cePrevio'=>'required|max:100',
 
             //PartidaNacimiento
-            'folio'=>'required',
-            'libro'=>'required',
+            'folio'=>'required|min:1|max:8|',
+            'libro'=>'required|min:1|max:8|',
 
             //Estudiante
-            'nombre'=>'required|alpha_dash|max:50',
-            'apellido'=>'required|alpha_dash|max:50',
+            'nie'=>'required|min:8|max:8|unique:matricula',
+            'nombre'=>'required|max:50',
+            'apellido'=>'required|max:50',
             'fechadenacimiento'=>'required',
             'sexo'=>'required',
-            'domicilio'=>'required',
+            'domicilio'=>'required|max:50',
+            'enfermedad'=>'max:4096',
             'zonahabitacion'=>'required',
             'autorizavacuna'=>'required',
             'discapacidad'=>'required',
 
+            //Madre
+            'nombre2'=>'max:50',
+            'apellido2'=>'max:50',
+            'ocupacion'=>'max:50',
+            'lugardetrabajo'=>'max:50',
+            'dui'=>'min:10|max:10|unique:responsable',            //Unique
+            'telefono'=>'min:8|max:8',
+
+            //Padre
+            'nombre3'=>'max:50',
+            'apellido3'=>'max:50',
+            'ocupacion3'=>'max:50',
+            'lugardetrabajo3'=>'max:50',
+            'dui3'=>'min:10|max:10',            //Unique
+            'telefono3'=>'min:8|max:8',
+
             //Contacto de Emergencia
-            'nombre4'=>'required|alpha_dash|max:50',
-            'apellido4'=>'required|alpha_dash|max:50',
+            'nombre4'=>'required|max:50',
+            'apellido4'=>'required|max:50',
             'telefono4'=>'required|min:8|max:8',
 
 
