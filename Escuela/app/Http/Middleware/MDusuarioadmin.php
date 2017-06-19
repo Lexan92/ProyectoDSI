@@ -2,6 +2,8 @@
 
 namespace Escuela\Http\Middleware;
 
+use Escuela\User;
+use Escuela\TipoUsuario;
 use Closure;
 
 class MDusuarioadmin
@@ -13,12 +15,15 @@ class MDusuarioadmin
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle( $request, Closure $next)
     {
         
-        $usuario_actual=\Auth::user();
-        if($usuario_actual->tipoUsuario!=1){
+        $usuarioactual=\Auth::user();
+      
+
+        if($usuarioactual->tipoUsuario!=1){
          return view("mensajes.msj_rechazado")->with("msj","No tiene suficientes Privilegios para acceder a esta seccion");
+
         }
         return $next($request);
     
