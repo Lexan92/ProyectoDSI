@@ -56,14 +56,21 @@ class ResponsableController extends Controller
      */
     public function show($id)
     {
+<<<<<<< HEAD
         $usuarioactual=\Auth::user();
+=======
+>>>>>>> b5570a204ed001ff38b0c7db73423c8642ef5159
         #$query = $request->get('nie');
         $res= DB::table('responsable')
         ->select('responsable.nombre','tipo_responsable.nombretipo','responsable.apellido','responsable.telefono','responsable.nie','responsable.id_persona')
         ->join('tipo_responsable as tipo_responsable','tipo_responsable.idresponsable','=','responsable.idresponsable','full outer')
         ->where('responsable.nie',$id)
         ->get();
+<<<<<<< HEAD
         return view('datos.Responsable.show',["responsables"=>$res,"usuarioactual"=>$usuarioactual]);
+=======
+        return view('datos.Responsable.show',["responsables"=>$res]);
+>>>>>>> b5570a204ed001ff38b0c7db73423c8642ef5159
     }
 
     /**
@@ -74,8 +81,12 @@ class ResponsableController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
         $usuarioactual=\Auth::user();
         return view("datos.Responsable.edit",["responsable"=>Responsable::findOrFail($id),"usuarioactual"=>$usuarioactual]);
+=======
+        return view("datos.Responsable.edit",["responsable"=>Responsable::findOrFail($id)]);
+>>>>>>> b5570a204ed001ff38b0c7db73423c8642ef5159
     }
 
     /**
@@ -87,7 +98,10 @@ class ResponsableController extends Controller
      */
     public function update(Request $request, $id)
     {
+<<<<<<< HEAD
         $usuarioactual=\Auth::user();
+=======
+>>>>>>> b5570a204ed001ff38b0c7db73423c8642ef5159
         $responsable= Responsable::findOrFail($id);
         #$responsable->idresponsable = $request->get('idresponsable');
         #$responsable->nie = $request->get('nie');

@@ -32,7 +32,7 @@ class EstudianteFormRequest extends Request
         
         'domicilio'=>'required',
         
-        'zonahabitacion'=>'required',
+        'zonaurbana'=>'required',
         'autorizavacuna'=>'required',
         'estado'=>'required'
         ];

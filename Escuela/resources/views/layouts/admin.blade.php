@@ -13,8 +13,6 @@
     <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('css/AdminLTE.min.css')}}">
-    <!-- Estilos Personalizados -->
-    <link rel="stylesheet" href="{{asset('css/estilos.css')}}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('css/_all-skins.min.css')}}">
@@ -49,16 +47,14 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <small class="bg-red">Online</small>
-                  <span class="hidden-xs">Jardines de la Sabana</span>
+                  <span class="fa fa-user">&nbsp;&nbsp;<?= $usuarioactual->name ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     
                     <p>
-                      Logout
-                      <small>Gestion de Usuarios</small>
+                     <span class="fa fa-user">&nbsp;&nbsp;<?= $usuarioactual->tipo($usuarioactual->tipoUsuario);   ?></span>
                     </p>
                   </li>
                   
@@ -66,7 +62,7 @@
                   <li class="user-footer">
                     
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Cerrar</a>
+                      <a href="logout" class="btn btn-default btn-flat">Cerrar Sesión</a>
                     </div>
                   </li>
                 </ul>
@@ -77,25 +73,28 @@
 
         </nav>
       </header>
+
+
+
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- Sidebar user panel -->
-                    
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">           
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header"></li>
-            
-            <li class="treeview">
+          
+         <li class="treeview">
               <a href="#">
                 <i class="fa fa-laptop"></i>
                 <span>Matricula</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{URL::action('MatriculaController@index')}}"><i class="fa fa-circle-o"></i> Nuevo Ingreso</a></li>
-                <li><a href="{{URL::action('Matricula2Controller@index')}}"><i class="fa fa-circle-o"></i> Antiguo Ingreso</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Artículos</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Categorías</a></li>
               </ul>
             </li>
             
@@ -124,14 +123,15 @@
                        
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-folder"></i> <span>Acceso</span>
+                <i class="fa fa-folder"></i> <span>Gestion de Usuarios</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Usuarios</a></li>
-                
+              <li><a href="{{ route('form_nuevo_usuario') }}"><i class="fa fa-circle-o"></i> Agregar usuario</a></li>
+              <li><a href="{{ route('listado_usuarios/{page?}')}}"><i class="fa fa-circle-o"></i>Listado Usuarios</a></li>
+
               </ul>
-            </li>
+            </li>-->
              <li>
               <a href="#">
                 <i class="fa fa-plus-square"></i> <span>Ayuda</span>
@@ -179,8 +179,8 @@
 		                          <!--Contenido-->
                               @yield('contenido')
 		                          <!--Fin Contenido-->
+                           </div>
                         </div>
-                      </div>
 		                    
                   		</div>
                   	</div><!-- /.row -->
@@ -188,17 +188,18 @@
               </div><!-- /.box -->
             </div><!-- /.col -->
           </div><!-- /.row -->
-        </div><!-- /.WRAPER -->
+
         </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
       <!--Fin-Contenido-->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2.3.0
+         
         </div>
-        <strong>Copyright &copy; 2015-2020 <a href="www.incanatoit.com">IncanatoIT</a>.</strong> All rights reserved.
+    
       </footer>
 
-      
+    <script src="{{asset('js/sistemalaravel.js')}}"></script>
     <!-- jQuery 2.1.4 -->
     <script src="{{asset('js/jQuery-2.1.4.min.js')}}"></script>
     @stack('scripts')
@@ -207,6 +208,8 @@
     <script src="{{asset('js/bootstrap-select.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('js/app.min.js')}}"></script>
-
+    
+    <script src="{{asset('js/sistemalaravel.js')}}"></script>
+    
   </body>
 </html>

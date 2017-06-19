@@ -19,7 +19,7 @@
                @foreach ($grados as $gr)
 				<tr>
 					<td>{{ $gr->idgrado}}</td>
-					<td>{{ $gr->nombre}}</td>
+					<td>{{ $gr->nombreGrado}}</td>
 					<td>
 						<a href="{{URL::action('GradoController@edit',$gr->idgrado)}}"><button class="btn btn-info">Editar</button></a>
                          <a href="" data-target="#modal-delete-{{$gr->idgrado}}" data-toggle="modal"><button class="btn btn-danger">Eliminar</button></a>
