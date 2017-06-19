@@ -11,6 +11,7 @@
 |
 */
 
+<<<<<<< HEAD
 
 Route::group(['middleware' => 'guest'], function () {//GRUPO DE URL DE USUARIO SIN LOGEARSE
     //FUNCIONAN 
@@ -77,12 +78,22 @@ Route::group(['middleware' => 'usuarioStandard'], function () {
 });
 
 
+=======
+Route::get('/', function () {
+    return view('welcome');
+});
+
+>>>>>>> 65156a4e391c229798a5858dbe77697815631d2f
 Route::resource('datos/tipoResponsable','TipoResponsableController');
-Route::resource('datos/Responsable','ResponsableController');
 Route::resource('datos/Estudiante','EstudianteController');
 Route::resource('detalle/grado','GradoController');
 Route::resource('detalle/seccion','SeccionController');
 Route::resource('detalle/turno','TurnoController');
+<<<<<<< HEAD
 Route::resource('expediente/matricula','MatriculaController');
 Route::resource('datos/Partida','PartidaController');
 
+=======
+Route::resource('expediente/matricula','MatriculaController');		 //Nuevo Ingreso
+Route::resource('expediente/matricula2','Matricula2Controller');	//Antiguo Ingreso
+>>>>>>> 65156a4e391c229798a5858dbe77697815631d2f

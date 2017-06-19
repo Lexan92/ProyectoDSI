@@ -28,37 +28,23 @@ class EstudianteController extends Controller
 		
     	if($request)
     	{
-            //los query capturan los criterios de busqueda que son enviados desde el search.blade de estudiante
-    	    $query1 = trim($request->get('searchNombre'));
-            $query2 = trim($request->get('searchApellido'));
-            $query3 = trim($request->get('searchNie'));
-            #$query4 = $request->get('fechamatricula');
-            $query5 = $request->get('idgrado');
-            $query6 = $request->get('idseccion');
-            $query7 = $request->get('idturno');
-          
-          //la consulta es guardada en la variable $est recordar que join
-          //genera una nueva tabla con todos las columnas especificada en el select
+    	    $query = trim($request->get('searchText'));
     		$est = DB::table('estudiante')
             ->select('estudiante.nombre','estudiante.apellido','estudiante.nie','matricula.nie','grado.nombreGrado','seccion.nombreSeccion')
             ->join('matricula as matricula','estudiante.nie','=','matricula.nie','full outer')
             ->join('detalle_grado as detalle_grado','matricula.iddetallegrado','=','detalle_grado.iddetallegrado','full outer')
             ->join('grado as grado','detalle_grado.idgrado','=','grado.idgrado','full outer')
             ->join('seccion as seccion','detalle_grado.idseccion','=','seccion.idseccion','full outer')
-            
-            ->where('estudiante.nombre',$query1)
-            ->orWhere('estudiante.apellido',$query2)
-            #->orWhere('matricula.fechamatricula',$query4)
-            ->orWhere('grado.idgrado',$query5)
-            #->orWhere('estudiante.nie',$query3)
+            ->where('estudiante.nombre',$query)
             ->get();
-        //catalogos de grados,secciones y turnos
-        $grados = DB::table('grado')->get();
-    	$secciones = DB::table('seccion')->get();
-    	$turnos = DB::table('turno')->get();
 
+<<<<<<< HEAD
             //se retorna el array de resultados a la vista en una variable "estudiantes" y ademas los catalogos de turno,seccion y grado
             return view('datos.Estudiante.index',["estudiantes"=>$est,"searchNombre"=>$query1,"searchApellido"=>$query2,"searchNie"=>$query3, "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos,"usuarioactual"=>$usuarioactual]);
+=======
+
+            return view('datos.Estudiante.index',["estudiantes"=>$est,"searchText"=>$query]);
+>>>>>>> 65156a4e391c229798a5858dbe77697815631d2f
 
     	}
     	
@@ -72,19 +58,54 @@ class EstudianteController extends Controller
 
     public function store( EstudianteFormRequest $request)		//Para almacenar
     {
-  
+    	$alumno = new Estudiante;
+    	$alumno -> nombre = $request -> get('nombreAlumno');
+    	$alumno -> apellido = $request -> get('apellidoAlumno');
+    	$alumno -> fechadenacimiento = $request -> get('fecha');
+    	$alumno -> sexo = $request -> get('opciones');
+    	$alumno -> discapacidad = $request -> get('opciones1');
+    	$alumno -> domicilio = $request -> get('domicilio');
+    	$alumno -> enfermedad = $request -> get('enfermedad');
+    	$alumno -> zonaurbana = $request -> get('opciones4');
+    	$alumno -> autorizavacuna = $request -> get('opciones3');
+    	$alumno -> estado = $request -> get('estado');
+    	$alumno -> id_partida = $request -> get('idPartida');
+    	$alumno -> save();
+
+
+    	$partida = new PartidaNacimiento;
+    	$partida -> nie = $alumno->nie;
+    	$partida -> folio = $request ->get('folio');
+    	$partida -> libro = $request ->get('libro');
+    	$partida -> copiapartida =$request -> get('imagenPartida');
+    	$partida -> save();
+
+    	$responsable = new Responsable;
+    	$responsable -> id_responsable = $request-> get('idResponsable');
+    	$responsable -> nie = $alumno ->nie;
+    	$responsable -> nombre = $request -> get('nombreMadre');
+    	$responsable -> apellido = $request-> get('apellidoMadre');
+    	
+
+
+    	return Redirect::to('datos/Estudiante');
     }
 
     public function show($id)		//Para mostrar
     {
+<<<<<<< HEAD
         $usuarioactual=\Auth::user();
 		
 		
     	return view("datos.Estudiante.show",["estudiante"=>Estudiante::findOrFail($id),"usuarioactual"=>$usuarioactual]);
+=======
+    	#return view("datos.Estudiante.show",["nie"=>Estudiante::findOrFail($id)]);
+>>>>>>> 65156a4e391c229798a5858dbe77697815631d2f
     }
 
     public function edit($id)
     {
+<<<<<<< HEAD
         $usuarioactual=\Auth::user();
 		
         //catalogos de grados,secciones y turnos
@@ -95,10 +116,14 @@ class EstudianteController extends Controller
         
 
         return view("datos.Estudiante.edit",["estudiante"=>Estudiante::findOrFail($id), "grados"=>$grados, "secciones"=>$secciones, "turnos"=>$turnos,"usuarioactual"=>$usuarioactual]);
+=======
+        return view("datos.Estudiante.edit",["estudiante"=>Estudiante::findOrFail($id)]);
+>>>>>>> 65156a4e391c229798a5858dbe77697815631d2f
     }
     
     
     
+<<<<<<< HEAD
     public function update(Request $request, $id)
     {	
         $usuarioactual=\Auth::user();
@@ -139,6 +164,12 @@ class EstudianteController extends Controller
         $estudiante->update();
         //se redirecciona al perfil actual del estudiante
         return Redirect::to('datos/Estudiante/'.$id);
+=======
+
+    public function update(TipoResponsableFormRequest $request, $id)
+    {	
+    
+>>>>>>> 65156a4e391c229798a5858dbe77697815631d2f
     }
 
     public function destroy($id)
